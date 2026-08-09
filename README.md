@@ -30,11 +30,7 @@ SETUP.sql             ← schema para crear tablas en Supabase
 npm install
 npm run dev
 ```
-
-Login: `admin` / `admin123` (o `Elias` / `elias123`)
-
 ## 3. Conectar Supabase
-
 1. Entra como Super Admin → **Configuración**
 2. Pega URL y anon key → **Guardar y Conectar**
 3. **Probar Conexión** debe responder OK
