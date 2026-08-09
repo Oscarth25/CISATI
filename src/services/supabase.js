@@ -13,10 +13,20 @@ export class NetworkError extends Error {
   }
 }
 
-const getConfig = () => ({
-  url: (localStorage.getItem('cisa_supa_url') || '').replace(/\/$/, ''),
-  key: localStorage.getItem('cisa_supa_key') || '',
-});
+// Config de Supabase: prioridad a lo guardado manualmente en localStorage
+// (pantalla de Configuración); si no hay nada guardado, cae a las variables
+// de entorno VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY definidas en el build
+// (Render → Environment). Así la app queda conectada desde el primer usuario
+// sin que nadie tenga que configurarla a mano.
+const ENV_URL = (import.meta.env.VITE_SUPABASE_URL || '').replace(/\/$/, '');
+const ENV_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+
+const getConfig = () => {
+  const url = (localStorage.getItem('cisa_supa_url') || '').replace(/\/$/, '');
+  const key = localStorage.getItem('cisa_supa_key') || '';
+  if (url && key) return { url, key };
+  return { url: ENV_URL, key: ENV_KEY };
+};
 
 export function saveConfig(url, key) {
   localStorage.setItem('cisa_supa_url', url.replace(/\/$/, ''));
@@ -35,6 +45,10 @@ export function loadConfig() {
 export function isConfigured() {
   const { url, key } = getConfig();
   return !!(url && key);
+}
+
+export function hasEnvDefault() {
+  return !!(ENV_URL && ENV_KEY);
 }
 
 export function isOnline() {
