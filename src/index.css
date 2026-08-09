@@ -1,0 +1,38 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+}
+
+/* Cada página ocupa toda la ventana */
+.page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;   /* ocupa todo el alto */
+  overflow: hidden; /* evita scroll innecesario */
+}
+
+/* Sección de estadísticas */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  width: 100%;
+}
+
+/* Contenedor de tablas/actividad */
+.table-wrap {
+  flex: 1;              /* ocupa el espacio sobrante */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-y: auto;     /* scroll si el contenido es largo */
+}
