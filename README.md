@@ -1,4 +1,4 @@
-# Hunter Tools TI · Sistema de Inventario
+# Cisa TI · Sistema de Control de Equipos e Inventario
 
 Vite + React + Supabase (persistencia en la nube).
 
